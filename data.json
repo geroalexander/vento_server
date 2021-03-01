@@ -1,0 +1,101 @@
+{
+  "users": [
+    {
+      "_id": "1",
+      "name": "Gero",
+      "restaurantID": "5555",
+      "sectionID": ["33"],
+      "account": {
+        "password": "pass",
+        "email": "example@mail.com",
+        "admin": false
+      }
+    },
+    {
+      "_id": "2",
+      "name": "Pamela",
+      "restaurantID": "5555",
+      "sectionID": ["33", "22"],
+      "account": {
+        "password": "pass",
+        "email": "example@mail.com",
+        "admin": false
+      }
+    }
+  ],
+  "sections": [
+    {
+      "_id": "33",
+      "name": "Fryer",
+      "memebersID": ["2", "1"],
+      "restaurantID": "5555",
+      "tasks": [
+        {
+          "_id": "1111",
+          "taskName": "Make Mayo",
+          "maxQuantity": 50,
+          "curQuantity": 40,
+          "completed": false
+        },
+        {
+          "_id": "2222",
+          "taskName": "Cut Potatoes",
+          "maxQuantity": 100,
+          "curQuantity": 90,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "_id": "22",
+      "name": "Grill",
+      "memebersID": ["2"],
+      "restaurantID": "5555",
+      "tasks": [
+        {
+          "_id": "1111",
+          "taskName": "Prepare Fish",
+          "maxQuantity": 50,
+          "curQuantity": 40,
+          "completed": false
+        }
+      ]
+    }
+  ],
+  "inventory": {
+    "_id": "444",
+    "restaurantID": "5555",
+    "stock": [
+      {
+        "_id": "1",
+        "item": "Oranges",
+        "quantity": 50
+      },
+      {
+        "_id": "2",
+        "item": "Apples",
+        "quantity": 100
+      }
+    ]
+  },
+  "restaurants": [
+    {
+      "_id": "5555",
+      "name": "Pesca",
+      "inventory": [
+        {
+          "_id": "1",
+          "item": "Oranges",
+          "quantity": 50
+        },
+        {
+          "_id": "2",
+          "item": "Apples",
+          "quantity": 100
+        }
+      ],
+      "memeberIDs": ["1", "2"],
+      "sectionIDs": ["33", "22"]
+    }
+  ]
+}
