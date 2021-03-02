@@ -3,7 +3,7 @@ const { reqString, reqNumber } = require('./-shortcuts');
 
 const TaskSchema = new mongoose.Schema(
   {
-    //_id
+    //_id is auto created
     taskName: reqString,
     maxQuantity: reqNumber,
     curQuantity: reqNumber,
@@ -16,7 +16,7 @@ const TaskSchema = new mongoose.Schema(
 
 const SectionSchema = new mongoose.Schema(
   {
-    //_id
+    //_id is auto created
     name: reqString,
     restaurantID: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
     memebersID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],

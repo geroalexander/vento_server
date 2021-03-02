@@ -3,7 +3,7 @@ const { reqString } = require('./-shortcuts');
 
 const InventorySchema = new mongoose.Schema(
   {
-    // id
+    //_id is auto created
     itemName: reqString,
     itemQuantity: Number,
   },
@@ -14,7 +14,7 @@ const InventorySchema = new mongoose.Schema(
 
 const RestaurantSchema = new mongoose.Schema(
   {
-    // _id
+    //_id is auto created
     name: reqString,
     inventory: [InventorySchema],
     membersID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
