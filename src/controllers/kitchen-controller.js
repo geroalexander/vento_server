@@ -54,16 +54,14 @@ const updateInventoryQuantity = async (req, res) => {
   try {
     const { itemQuantity } = req.body;
     const { itemID, kitchenID } = req.params;
-    console.log('itemID---->', itemID);
-    console.log('kitchenID---->', kitchenID);
-    console.log('newQuantity---->', itemQuantity);
 
-    const x = await Kitchen.findOneAndUpdate(
+    const updatedItem = await Kitchen.findOneAndUpdate(
       { 'inventory._id': itemID },
       { $set: { 'inventory.$.itemQuantity': itemQuantity } },
       { new: true },
     );
-    res.send(x);
+    res.status(201);
+    res.send(updatedItem);
   } catch (err) {
     res.status(400);
     res.send(err);
