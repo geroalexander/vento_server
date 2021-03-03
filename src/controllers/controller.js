@@ -47,15 +47,14 @@ const createNewSection = async (req, res) => {
   try {
     const { sectionName } = req.body;
     const { kitchenID, userID } = req.params;
-    const membersID = [userID];
 
     const newSection = await Section.create({
       sectionName,
       kitchenID,
-      membersID,
     });
     const updatedAdmin = await User.findByIdAndUpdate(
       userID,
+      // push the new section into the user object sectionID array
       { $push: { sectionID: newSection._id } },
       { new: true },
     );
