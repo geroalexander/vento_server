@@ -34,7 +34,7 @@ const addItemToInventory = async (req, res) => {
       'inventory.itemName': itemName,
     });
     if (checkForItem) {
-      res.send('You already have a product with that name!');
+      res.send(`You already have an item called ${itemName}!`);
     } else {
       const createdInventory = await Kitchen.findByIdAndUpdate(
         kitchenID,

@@ -11,19 +11,11 @@ router.put(
   kitchenCTRL.updateInventoryQuantity,
 );
 
-// add new user
-router.post('/user', userCTRL.createNewUser);
-// router.put('/user/:userID', userCTRL.updateUserInfo);
-// router.delete('/user/:userID', userCTRL.deleteThisUser);
-
-// create new kitchen and assign to admin user
-
-// add items to inventory of kitchen
-
-// create new section (assign members and restaurant)
 router.post('/section/:kitchenID/:userID', sectionCTRL.createNewSection);
+router.put('/task/:sectionID', sectionCTRL.addTaskToSection);
+
+router.post('/user', userCTRL.createNewUser);
 
 // add a new taks to a section
-router.put('/task/:sectionID', sectionCTRL.addTaskToSection);
 
 module.exports = router;

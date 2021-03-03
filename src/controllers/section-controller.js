@@ -7,21 +7,28 @@ const createNewSection = async (req, res) => {
     const { sectionName } = req.body;
     const { kitchenID, userID } = req.params;
 
-    const newSection = await Section.create({
-      sectionName,
-      kitchenID,
+    const checkForSection = await Section.findOne({
+      sectionName: sectionName,
     });
-    const updatedAdmin = await User.findByIdAndUpdate(
-      userID,
-      // push the new section into the user object sectionID array
-      { $push: { sectionID: newSection._id } },
-      { new: true },
-    );
-    res.status(201);
-    res.send({
-      newSection,
-      updatedAdmin,
-    });
+
+    if (checkForSection) {
+      res.send(`You already have a section called ${sectionName}!`);
+    } else {
+      const newSection = await Section.create({
+        sectionName,
+        kitchenID,
+      });
+      const updatedAdmin = await User.findByIdAndUpdate(
+        userID,
+        { $push: { sectionID: newSection._id } },
+        { new: true },
+      );
+      res.status(201);
+      res.send({
+        newSection,
+        updatedAdmin,
+      });
+    }
   } catch (err) {
     res.status(400);
     res.send(err);
