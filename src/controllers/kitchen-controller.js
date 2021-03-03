@@ -41,7 +41,7 @@ const addItemToInventory = async (req, res) => {
         { $push: { inventory: { itemName, itemQuantity } } },
         { new: true },
       );
-      res.status(201);
+      res.status(200);
       res.send(createdInventory);
     }
   } catch (err) {
@@ -53,14 +53,14 @@ const addItemToInventory = async (req, res) => {
 const updateInventoryQuantity = async (req, res) => {
   try {
     const { itemQuantity } = req.body;
-    const { itemID, kitchenID } = req.params;
+    const { itemID } = req.params;
 
     const updatedItem = await Kitchen.findOneAndUpdate(
       { 'inventory._id': itemID },
       { $set: { 'inventory.$.itemQuantity': itemQuantity } },
       { new: true },
     );
-    res.status(201);
+    res.status(200);
     res.send(updatedItem);
   } catch (err) {
     res.status(400);

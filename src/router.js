@@ -13,7 +13,7 @@ router.put(
 
 router.post('/section/:kitchenID/:userID', sectionCTRL.createNewSection);
 router.put('/task/:sectionID', sectionCTRL.addTaskToSection);
-router.put('/task/:sectionID/taskID', sectionCTRL.updateTaskInSection);
+router.put('/task/:sectionID/:taskID', sectionCTRL.updateTaskInSection);
 
 router.post('/user', userCTRL.createNewUser);
 

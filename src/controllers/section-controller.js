@@ -54,7 +54,7 @@ const addTaskToSection = async (req, res) => {
         { $push: { tasks: taskObject } },
         { new: true },
       );
-      res.status(201);
+      res.status(200);
       res.send(createdTask);
     }
   } catch (err) {
@@ -64,7 +64,26 @@ const addTaskToSection = async (req, res) => {
 };
 
 const updateTaskInSection = async (req, res) => {
-  () => {};
+  try {
+    const { curQuantity, completed } = req.body;
+    const { taskID } = req.params;
+
+    const updatedTask = await Section.findOneAndUpdate(
+      { 'tasks._id': taskID },
+      {
+        $set: {
+          'tasks.$.curQuantity': curQuantity,
+          'tasks.$.completed': completed,
+        },
+      },
+      { new: true },
+    );
+    res.status(200);
+    res.send(updatedTask);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
 };
 
 module.exports = {
