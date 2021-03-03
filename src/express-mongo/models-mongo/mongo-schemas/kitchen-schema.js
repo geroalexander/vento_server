@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
-const { reqString } = require('./-shortcuts');
+const { reqString, reqNumber } = require('./-shortcuts');
 
 const InventorySchema = new mongoose.Schema(
   {
     //_id is auto created
     itemName: reqString,
-    itemQuantity: Number,
+    itemQuantity: reqNumber,
   },
   {
-    timestaps: true,
+    timestamps: true,
   },
 );
 
-const RestaurantSchema = new mongoose.Schema(
+const KitchenSchema = new mongoose.Schema(
   {
     //_id is auto created
     name: reqString,
@@ -24,4 +24,4 @@ const RestaurantSchema = new mongoose.Schema(
   },
 );
 
-exports.Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+exports.Kitchen = mongoose.model('Kitchen', KitchenSchema);

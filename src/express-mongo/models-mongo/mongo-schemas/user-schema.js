@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
-const { reqString, otherID, falseBool } = require('./-shortcuts');
+const { reqString, refID, falseBool } = require('./-shortcuts');
 
 const UserSchema = new mongoose.Schema(
   {
     //_id is auto created
     name: reqString,
-    restaurantID: otherID,
-    sectionID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }],
     email: reqString,
+    password: reqString,
+    restaurantID: refID,
+    sectionID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }],
     admin: falseBool,
   },
   {

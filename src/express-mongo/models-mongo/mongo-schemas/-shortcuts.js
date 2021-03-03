@@ -8,12 +8,12 @@ exports.reqNumber = {
   default: 0,
 };
 
-exports.otherID = {
+exports.refID = {
   type: String,
   default: null,
 };
 
 exports.falseBool = {
   type: Boolean,
-  default: null,
+  default: false,
 };

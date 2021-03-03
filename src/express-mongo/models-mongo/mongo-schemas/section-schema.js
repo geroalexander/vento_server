@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { reqString, reqNumber } = require('./-shortcuts');
+const { reqString, reqNumber, falseBool } = require('./-shortcuts');
 
 const TaskSchema = new mongoose.Schema(
   {
@@ -7,7 +7,7 @@ const TaskSchema = new mongoose.Schema(
     taskName: reqString,
     maxQuantity: reqNumber,
     curQuantity: reqNumber,
-    completed: Boolean,
+    completed: falseBool,
   },
   {
     timestamps: true,
