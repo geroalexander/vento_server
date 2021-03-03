@@ -30,11 +30,10 @@ const addItemToInventory = async (req, res) => {
     const { itemName, itemQuantity } = req.body;
     const { kitchenID } = req.params;
 
-    const currentKitchen = await Kitchen.findById(kitchenID);
-    let checkKitchen = await currentKitchen.inventory.find(
-      (inventory) => inventory.itemName === itemName,
-    );
-    if (checkKitchen) {
+    const checkForItem = await Kitchen.findOne({
+      'inventory.itemName': itemName,
+    });
+    if (checkForItem) {
       res.send('You already have a product with that name!');
     } else {
       const createdInventory = await Kitchen.findByIdAndUpdate(
@@ -51,7 +50,28 @@ const addItemToInventory = async (req, res) => {
   }
 };
 
+const updateInventoryQuantity = async (req, res) => {
+  try {
+    const { itemQuantity } = req.body;
+    const { itemID, kitchenID } = req.params;
+    console.log('itemID---->', itemID);
+    console.log('kitchenID---->', kitchenID);
+    console.log('newQuantity---->', itemQuantity);
+
+    const x = await Kitchen.findOneAndUpdate(
+      { 'inventory._id': itemID },
+      { $set: { 'inventory.$.itemQuantity': itemQuantity } },
+      { new: true },
+    );
+    res.send(x);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 module.exports = {
   createNewKitchen,
   addItemToInventory,
+  updateInventoryQuantity,
 };
