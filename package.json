@@ -16,5 +16,14 @@
     "express": "^4.17.1",
     "graphql": "^15.5.0",
     "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
