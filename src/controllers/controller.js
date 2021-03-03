@@ -22,46 +22,84 @@ const createNewUser = async (req, res) => {
 
 const createNewKitchen = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { kitchenName } = req.body;
     const { userID } = req.params;
     const membersID = [userID];
-    const newKitchen = await Kitchen.create({ name, membersID });
+
+    const newKitchen = await Kitchen.create({ kitchenName, membersID });
+    const updatedAdmin = await User.findByIdAndUpdate(
+      userID,
+      { $set: { admin: true, kitchenID: newKitchen._id } },
+      { new: true },
+    );
     res.status(201);
-    res.send(newKitchen);
+    res.send({
+      newKitchen,
+      updatedAdmin,
+    });
   } catch (err) {
     res.status(400);
     res.send(err);
   }
 };
 
-// const createNewSection = async (req, res) => {
-//   try {
-//     const { name } = req.body;
-//     const newSection = await Section.create(name);
-//     res.status(201);
-//     res.send(newSection);
-//   } catch (err) {
-//     res.status(400);
-//     res.send(err);
-//   }
-// };
-
-const addItemToInventory = async (req, res) => {
+const createNewSection = async (req, res) => {
   try {
-    console.log(req.body);
-    const inventoryObj = req.body;
+    const { sectionName } = req.body;
+    const { kitchenID, userID } = req.params;
+    const membersID = [userID];
 
-    console.log(req.params);
-    const { kitchenID } = req.params;
-    const updatedKitchen = await Kitchen.findByIdAndUpdate(
+    const newSection = await Section.create({
+      sectionName,
       kitchenID,
-      {
-        $push: { inventory: inventoryObj },
-      },
+      membersID,
+    });
+    const updatedAdmin = await User.findByIdAndUpdate(
+      userID,
+      { $push: { sectionID: newSection._id } },
       { new: true },
     );
     res.status(201);
-    res.send(updatedKitchen);
+    res.send({
+      newSection,
+      updatedAdmin,
+    });
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
+const addItemToInventory = async (req, res) => {
+  try {
+    const inventoryObject = req.body;
+    const { kitchenID } = req.params;
+
+    const createdInventory = await Kitchen.findByIdAndUpdate(
+      kitchenID,
+      { $push: { inventory: inventoryObject } },
+      { new: true },
+    );
+    res.status(201);
+    res.send(createdInventory);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
+const addTaskToSection = async (req, res) => {
+  try {
+    const taskObject = req.body;
+    const { sectionID } = req.params;
+
+    const createdTask = await Section.findByIdAndUpdate(
+      sectionID,
+      { $push: { tasks: taskObject } },
+      { new: true },
+    );
+    res.status(201);
+    res.send(createdTask);
   } catch (err) {
     res.status(400);
     res.send(err);
@@ -71,6 +109,7 @@ const addItemToInventory = async (req, res) => {
 module.exports = {
   createNewUser,
   createNewKitchen,
-  // createNewSection,
+  createNewSection,
   addItemToInventory,
+  addTaskToSection,
 };

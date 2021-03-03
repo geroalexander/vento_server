@@ -7,6 +7,7 @@ const TaskSchema = new mongoose.Schema(
     taskName: reqString,
     maxQuantity: reqNumber,
     curQuantity: reqNumber,
+    units: String,
     completed: falseBool,
   },
   {
@@ -17,9 +18,9 @@ const TaskSchema = new mongoose.Schema(
 const SectionSchema = new mongoose.Schema(
   {
     //_id is auto created
-    name: reqString,
-    restaurantID: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
-    memebersID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    sectionName: reqString,
+    kitchenID: { type: mongoose.Schema.Types.ObjectId, ref: 'Kitchen' },
+    membersID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     tasks: [TaskSchema],
   },
   {

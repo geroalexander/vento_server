@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
     name: reqString,
     email: reqString,
     password: reqString,
-    restaurantID: refID,
+    kitchenID: refID,
     sectionID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }],
     admin: falseBool,
   },
