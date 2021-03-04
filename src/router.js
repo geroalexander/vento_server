@@ -5,18 +5,20 @@ const kitchenCTRL = require('./controllers/kitchen-controller');
 const router = require('express').Router();
 
 router.post('/kitchen/:userID', kitchenCTRL.createNewKitchen);
-router.put('/inventory/:kitchenID', kitchenCTRL.addItemToInventory);
+router.post('/inventory/:kitchenID', kitchenCTRL.addItemToInventory);
 router.put(
   '/inventory/:kitchenID/:itemID',
   kitchenCTRL.updateInventoryQuantity,
 );
+router.delete(
+  '/inventory/:kitchenID/:itemID',
+  kitchenCTRL.removeItemFromInventory,
+);
 
 router.post('/section/:kitchenID/:userID', sectionCTRL.createNewSection);
-router.put('/task/:sectionID', sectionCTRL.addTaskToSection);
+router.post('/task/:sectionID', sectionCTRL.addTaskToSection);
 router.put('/task/:sectionID/:taskID', sectionCTRL.updateTaskInSection);
 
 router.post('/user', userCTRL.createNewUser);
-
-// add a new taks to a section
 
 module.exports = router;

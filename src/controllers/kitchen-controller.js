@@ -68,8 +68,25 @@ const updateInventoryQuantity = async (req, res) => {
   }
 };
 
+const removeItemFromInventory = async (req, res) => {
+  try {
+    const { kitchenID, itemID } = req.params;
+    const updatedInventory = await Kitchen.findOneAndUpdate(
+      {},
+      { $pull: { inventory: { _id: itemID } } },
+      { new: true },
+    );
+    res.status(200);
+    res.send(updatedInventory);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 module.exports = {
   createNewKitchen,
   addItemToInventory,
   updateInventoryQuantity,
+  removeItemFromInventory,
 };

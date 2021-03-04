@@ -6,4 +6,5 @@ const database = 'vento';
 exports.connection = mongoose.connect(`mongodb://${server}/${database}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
