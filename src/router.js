@@ -20,6 +20,7 @@ router.delete(
 router.post('/section/:kitchenID/:userID', sectionCTRL.createNewSection);
 router.post('/task/:sectionID', sectionCTRL.addTaskToSection);
 router.put('/task/:sectionID/:taskID', sectionCTRL.updateTaskInSection);
+router.delete('/task/:sectionID/:taskID', sectionCTRL.removeTaskItem);
 
 //~~~~~~~~~USER REQUESTS~~~~~~~~~~~
 

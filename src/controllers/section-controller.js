@@ -9,6 +9,7 @@ const createNewSection = async (req, res) => {
 
     const checkForSection = await Section.findOne({
       sectionName: sectionName,
+      kitchenID: kitchenID,
     });
 
     if (checkForSection) {
@@ -42,6 +43,7 @@ const addTaskToSection = async (req, res) => {
 
     const checkForTask = await Section.findOne({
       'tasks.taskName': taskObject.taskName,
+      sectionID: sectionID,
     });
 
     if (checkForTask) {
@@ -86,8 +88,27 @@ const updateTaskInSection = async (req, res) => {
   }
 };
 
+const removeTaskItem = async (req, res) => {
+  try {
+    const { sectionID, taskID } = req.params;
+    console.log(sectionID, taskID);
+    const updatedTaskList = await Section.findOneAndUpdate(
+      {},
+      { $pull: { tasks: { _id: taskID } } },
+      { new: true },
+    );
+    console.log('updated', updatedTaskList);
+    res.status(200);
+    res.send(updatedTaskList);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 module.exports = {
   createNewSection,
   addTaskToSection,
   updateTaskInSection,
+  removeTaskItem,
 };

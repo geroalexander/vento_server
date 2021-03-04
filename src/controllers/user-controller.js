@@ -32,24 +32,7 @@ const findUserByID = async (req, res) => {
   }
 };
 
-// const updateUserInfo = async (req, res) => {
-//   try {
-
-//     res.status(200);
-//     res.send();
-//   } catch (err) {
-//     res.status(400);
-//     res.send(err);
-//   }
-// };
-
 module.exports = {
   createNewUser,
   findUserByID,
 };
-
-// const deleteThisUser = async (req, res) => {
-//   try {
-//     () => {};
-//   } catch (err) {}
-// };
