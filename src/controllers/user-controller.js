@@ -20,6 +20,18 @@ const createNewUser = async (req, res) => {
   }
 };
 
+const findUserByID = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const searchedUser = await User.findById(userID);
+    res.status(201);
+    res.send(searchedUser);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 // const updateUserInfo = async (req, res) => {
 //   try {
 
@@ -33,7 +45,7 @@ const createNewUser = async (req, res) => {
 
 module.exports = {
   createNewUser,
-  // updateUserInfo,
+  findUserByID,
 };
 
 // const deleteThisUser = async (req, res) => {
