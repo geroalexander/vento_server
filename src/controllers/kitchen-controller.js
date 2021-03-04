@@ -84,9 +84,23 @@ const removeItemFromInventory = async (req, res) => {
   }
 };
 
+const findKitchenByID = async (req, res) => {
+  try {
+    const { kitchenID } = req.params;
+    console.log(kitchenID);
+    const searchedKitchen = await Kitchen.findById(kitchenID);
+    res.status(201);
+    res.send(searchedKitchen);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 module.exports = {
   createNewKitchen,
   addItemToInventory,
   updateInventoryQuantity,
   removeItemFromInventory,
+  findKitchenByID,
 };

@@ -5,6 +5,7 @@ const kitchenCTRL = require('./controllers/kitchen-controller');
 const router = require('express').Router();
 
 //~~~~~~~~~KITCHEN REQUESTS~~~~~~~~~~~
+router.get('/kitchen/:kitchenID', kitchenCTRL.findKitchenByID);
 router.post('/kitchen/:userID', kitchenCTRL.createNewKitchen);
 router.post('/inventory/:kitchenID', kitchenCTRL.addItemToInventory);
 router.put(
@@ -17,6 +18,7 @@ router.delete(
 );
 
 //~~~~~~~~~SECTION REQUESTS~~~~~~~~~~~
+router.get('/section/:sectionID', sectionCTRL.findSectionByID);
 router.post('/section/:kitchenID/:userID', sectionCTRL.createNewSection);
 router.post('/task/:sectionID', sectionCTRL.addTaskToSection);
 router.put('/task/:sectionID/:taskID', sectionCTRL.updateTaskInSection);

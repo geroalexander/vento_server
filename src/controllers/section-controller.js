@@ -36,6 +36,18 @@ const createNewSection = async (req, res) => {
   }
 };
 
+const findSectionByID = async (req, res) => {
+  try {
+    const { sectionID } = req.params;
+    const searchedSection = await Section.findById(sectionID);
+    res.status(201);
+    res.send(searchedSection);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 const addTaskToSection = async (req, res) => {
   try {
     const taskObject = req.body;
@@ -97,7 +109,6 @@ const removeTaskItem = async (req, res) => {
       { $pull: { tasks: { _id: taskID } } },
       { new: true },
     );
-    console.log('updated', updatedTaskList);
     res.status(200);
     res.send(updatedTaskList);
   } catch (err) {
@@ -108,6 +119,7 @@ const removeTaskItem = async (req, res) => {
 
 module.exports = {
   createNewSection,
+  findSectionByID,
   addTaskToSection,
   updateTaskInSection,
   removeTaskItem,
