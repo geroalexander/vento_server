@@ -50,26 +50,24 @@ const findSectionByID = async (req, res) => {
 
 const addTaskToSection = async (req, res) => {
   try {
-    const taskObject = req.body;
+    const { taskName, maxQuantity } = req.body;
     const { sectionID } = req.params;
-
     const checkForTask = await Section.findOne({
-      'tasks.taskName': taskObject.taskName,
+      'tasks.taskName': taskName,
+      'tasks.maxQuantity': maxQuantity,
       sectionID: sectionID,
     });
-
+    console.log('checked for task', checkForTask);
     if (checkForTask) {
       res.send(`You already have a task called ${taskObject.taskName}`);
     } else {
-      if (taskObject.maxQuantity === taskObject.curQuantity)
-        taskObject.completed = true;
       const createdTask = await Section.findByIdAndUpdate(
         sectionID,
-        { $push: { tasks: taskObject } },
+        { $push: { tasks: { taskName, maxQuantity } } },
         { new: true },
       );
       res.status(200);
-      res.send(createdTask);
+      res.send(createdTask.tasks);
     }
   } catch (err) {
     res.status(400);
@@ -103,7 +101,6 @@ const updateTaskInSection = async (req, res) => {
 const removeTaskItem = async (req, res) => {
   try {
     const { sectionID, taskID } = req.params;
-    console.log(sectionID, taskID);
     const updatedTaskList = await Section.findOneAndUpdate(
       {},
       { $pull: { tasks: { _id: taskID } } },
@@ -117,10 +114,43 @@ const removeTaskItem = async (req, res) => {
   }
 };
 
+// const deleteSection = async (req, res) => {
+//   try {
+//     const { kitchenID} = req.params;
+//     const updatedKitchen = await Section.findByIdAndUpdate(
+//       {}
+//     )
+//   } catch (err) {
+//     res.status(400);
+//     res.send(err);
+//   }
+// }
+
+const updateNotes = async (req, res) => {
+  try {
+    const { sectionID } = req.params;
+    const { notes } = req.body;
+    const updatedSection = await Section.findByIdAndUpdate(
+      sectionID,
+      {
+        notes,
+      },
+      { new: true },
+    );
+    res.status(200);
+    res.send(updatedSection);
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 module.exports = {
   createNewSection,
   findSectionByID,
   addTaskToSection,
   updateTaskInSection,
   removeTaskItem,
+  updateNotes,
+  // deleteSection,
 };

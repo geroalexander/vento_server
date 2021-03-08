@@ -87,7 +87,7 @@ const removeItemFromInventory = async (req, res) => {
 const findKitchenByID = async (req, res) => {
   try {
     const { kitchenID } = req.params;
-    console.log(kitchenID);
+    // console.log(kitchenID);
     const searchedKitchen = await Kitchen.findById(kitchenID);
     res.status(201);
     res.send(searchedKitchen);

@@ -20,6 +20,23 @@ const createNewUser = async (req, res) => {
   }
 };
 
+const createNewUserInKitchen = async (req, res) => {
+  try {
+    const { name, email, password, kitchenID } = req.body;
+    const dbEmails = await User.find({ email });
+    if (dbEmails.length) res.send('this email already has an account');
+    else {
+      const newUser = await User.create({ name, email, password, kitchenID });
+
+      res.status(201);
+      res.send(newUser);
+    }
+  } catch (err) {
+    res.status(400);
+    res.send(err);
+  }
+};
+
 const findUserByID = async (req, res) => {
   try {
     const { userID } = req.params;
@@ -32,7 +49,18 @@ const findUserByID = async (req, res) => {
   }
 };
 
+// const getUserInKitchen = async( req, res) => {
+//   try {
+//     const { kitchenID} = req.qarams;
+//     const
+//   } catch (err) {
+//     res.status(400)
+//     res.send(err)
+//   }
+// }
+
 module.exports = {
   createNewUser,
   findUserByID,
+  createNewUserInKitchen,
 };

@@ -21,6 +21,7 @@ const SectionSchema = new mongoose.Schema(
     sectionName: reqString,
     kitchenID: { type: mongoose.Schema.Types.ObjectId, ref: 'Kitchen' },
     tasks: [TaskSchema],
+    notes: String,
   },
   {
     timestamps: true,

@@ -16,6 +16,7 @@ const KitchenSchema = new mongoose.Schema(
   {
     //_id is auto created
     kitchenName: reqString,
+    kitchenID: Number,
     inventory: [InventorySchema],
     membersID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   },
