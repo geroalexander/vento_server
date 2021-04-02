@@ -54,3 +54,8 @@ The easiest way to do this is by scanning the QR code shown once you run the cli
 ## Next steps
 
 In the future I would like to modify this application to work as a PWA and make is accessibile for both native and web/desktop use.
+
+## Contributors
+#### Gero Kassing
+- [LinkedIn](https://www.linkedin.com/in/gero-kassing-9b79311a3/)
+- [GitHub](https://github.com/geroalexander)
