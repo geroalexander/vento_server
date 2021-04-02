@@ -2,7 +2,7 @@
 
 ## Server Repo
 
-> This is the client side, for the [client](https://github.com/geroalexander/vento_client) side, navigate to another repository.
+> This is the server side, for the [client](https://github.com/geroalexander/vento_client) side, navigate to another repository.
 
 Vento is a lightweight application built for small and medium sized restaurant kitchens, that combines an inventory management system with a task organiser.
 
