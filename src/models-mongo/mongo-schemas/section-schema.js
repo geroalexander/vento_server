@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema(
     //_id is auto created
     taskName: reqString,
     maxQuantity: reqNumber,
-    curQuantity: reqNumber,
+    curQuantity: { type: Number, default: 0 },
     units: String,
     completed: falseBool,
   },

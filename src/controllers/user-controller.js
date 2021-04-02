@@ -2,35 +2,39 @@ const { User } = require('../models-mongo/mongo-schemas/user-schema');
 const { Section } = require('../models-mongo/mongo-schemas/section-schema');
 const { Kitchen } = require('../models-mongo/mongo-schemas/kitchen-schema');
 
-const createNewUser = async (req, res) => {
+const createNewAdmin = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
-    const dbEmails = await User.find({ email });
-    if (dbEmails.length) res.send('this email already has an account');
-    else {
-      const newUser = await User.create({ name, email, password });
-
-      res.status(201);
-      res.send(newUser);
-    }
+    const newUser = await User.create({ name, email, password });
+    res.status(201);
+    res.send(newUser);
   } catch (err) {
     res.status(400);
     res.send(err);
   }
 };
 
-const createNewUserInKitchen = async (req, res) => {
+const createNewEmployee = async (req, res) => {
   try {
     const { name, email, password, kitchenID } = req.body;
-    const dbEmails = await User.find({ email });
-    if (dbEmails.length) res.send('this email already has an account');
-    else {
-      const newUser = await User.create({ name, email, password, kitchenID });
+    console.log('name----->', name);
+    console.log('email----->', email);
+    console.log('password----->', password);
+    console.log('kitchenID----->', kitchenID);
 
-      res.status(201);
-      res.send(newUser);
-    }
+    const newUser = await User.create({ name, email, password });
+
+    const updatedKitchen = await Kitchen.findByIdAndUpdate(
+      kitchenID,
+      { $push: { membersID: 'newUser._id' } },
+      { new: true },
+    );
+
+    console.log('---newUser---->', newUser);
+    console.log('---updatedKitchen---->', updatedKitchen);
+
+    // res.status(201);
+    // res.send(newUser);
   } catch (err) {
     res.status(400);
     res.send(err);
@@ -60,7 +64,7 @@ const findUserByID = async (req, res) => {
 // }
 
 module.exports = {
-  createNewUser,
+  createNewAdmin,
   findUserByID,
-  createNewUserInKitchen,
+  createNewEmployee,
 };

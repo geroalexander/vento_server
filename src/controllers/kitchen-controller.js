@@ -25,6 +25,23 @@ const createNewKitchen = async (req, res) => {
   }
 };
 
+// const addEmployeeToKitchen = async (req, res) => {
+//   try {
+//     const { kitchenID } = req.params;
+//     const  { userID } = req.body
+
+//     const updatedKitchen = await Kitchen.findByIdAndUpdate(kitchenID, {
+//       $push: { membersID: userID },
+//     });
+//     console.log(updatedKitchen);
+//     // res.status(200);
+//     // res.send(updatedKitchen);
+//   } catch (err) {
+//     res.status(400);
+//     res.send(err);
+//   }
+// };
+
 const addItemToInventory = async (req, res) => {
   try {
     const { itemName, itemQuantity } = req.body;
@@ -103,4 +120,5 @@ module.exports = {
   updateInventoryQuantity,
   removeItemFromInventory,
   findKitchenByID,
+  // addEmployeeToKitchen,
 };

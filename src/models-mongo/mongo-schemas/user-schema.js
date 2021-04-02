@@ -4,10 +4,10 @@ const { reqString, refID, falseBool } = require('./-shortcuts');
 const UserSchema = new mongoose.Schema(
   {
     //_id is auto created
-    name: reqString,
     email: reqString,
-    password: reqString,
-    kitchenID: refID,
+    name: reqString,
+    password: String,
+    kitchenID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Kitchen' }],
     sectionID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }],
     admin: falseBool,
   },

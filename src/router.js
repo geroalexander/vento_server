@@ -29,8 +29,8 @@ router.delete('/task/:sectionID/:taskID', sectionCTRL.removeTaskItem);
 //~~~~~~~~~USER REQUESTS~~~~~~~~~~~
 
 router.get('/user/:userID', userCTRL.findUserByID);
-router.post('/user', userCTRL.createNewUser);
-router.post('/user/kitchen', userCTRL.createNewUserInKitchen);
+router.post('/user', userCTRL.createNewAdmin);
+router.put('/user/kitchen', userCTRL.createNewEmployee);
 // router.get('/user/:kitchenID', userCTRL.getUserInKitchen);
 
 module.exports = router;

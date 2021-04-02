@@ -57,7 +57,6 @@ const addTaskToSection = async (req, res) => {
       'tasks.maxQuantity': maxQuantity,
       sectionID: sectionID,
     });
-    console.log('checked for task', checkForTask);
     if (checkForTask) {
       res.send(`You already have a task called ${taskObject.taskName}`);
     } else {
@@ -114,18 +113,6 @@ const removeTaskItem = async (req, res) => {
   }
 };
 
-// const deleteSection = async (req, res) => {
-//   try {
-//     const { kitchenID} = req.params;
-//     const updatedKitchen = await Section.findByIdAndUpdate(
-//       {}
-//     )
-//   } catch (err) {
-//     res.status(400);
-//     res.send(err);
-//   }
-// }
-
 const updateNotes = async (req, res) => {
   try {
     const { sectionID } = req.params;
@@ -152,5 +139,4 @@ module.exports = {
   updateTaskInSection,
   removeTaskItem,
   updateNotes,
-  // deleteSection,
 };
